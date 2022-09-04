@@ -1,3 +1,4 @@
+from turtle import Screen
 import pygame
 from assets.scripts.characters.spaceship import spaceship
 
@@ -19,8 +20,10 @@ y2s1 = -1*SCREENHEIGHT
 y1s2 = 0
 y2s2 = -1*SCREENHEIGHT
 
-def setBackground(width : int, height : int) -> None:
+def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 	# To set the background to a 'tiled' version of the background, also to make it move
+
+	screen.fill((10,10,10))
 
 	global y1s1
 	global y2s1
@@ -33,7 +36,6 @@ def setBackground(width : int, height : int) -> None:
 	y2s2 += 3
 
 	for x in range(0, width, 500):
-		surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,0))
 		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y1s1))
 		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y2s1))
 		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y1s2))
@@ -64,7 +66,7 @@ moveState = {
 # Game loop
 while running:
 	# Updating frames
-	setBackground(SCREENWIDTH, SCREENHEIGHT)
+	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
 	player.draw(surface)
 
 	# Movements
