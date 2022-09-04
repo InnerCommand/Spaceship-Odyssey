@@ -1,5 +1,5 @@
 import pygame
-from assets.characters.spaceship import spaceship
+from assets.scripts.characters.spaceship import spaceship
 
 # Init
 pygame.init()
