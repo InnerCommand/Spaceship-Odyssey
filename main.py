@@ -4,10 +4,9 @@ from assets.scripts.characters.spaceship import spaceship
 # Init
 pygame.init()
 
-SCREENWIDTH = 1000
-SCREENHEIGHT = 700
+surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.FULLSCREEN)
 
-surface = pygame.display.set_mode(((SCREENWIDTH, SCREENHEIGHT)))
+SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
 pygame.display.set_caption('Red Planet')
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
@@ -34,15 +33,11 @@ def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 	y1s2 += 3
 	y2s2 += 3
 
-	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y1s1))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y2s1))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y1s2))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y2s2))
-
-	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y1s1))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y2s1))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y1s2))
-	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y2s2))
+	for x in range(0,width,500):
+		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y2s1))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y1s1))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y1s2))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y2s2))
 
 	if y1s1 > height:
 		y1s1 = -1*height
