@@ -46,15 +46,15 @@ class spaceship:
 		self.x += math.sin(math.radians(self.angle)) * (-1*amt)
 
 		# Check to make sure user is not hitting edges
-		if self.y > self.screenHeight-self.height:
-			self.y = self.screenHeight-self.height
-		elif self.y < 150:
-			self.y = 150
+		if self.y > self.screenHeight-(self.height/2):
+			self.y = self.screenHeight-(self.height/2)
+		elif self.y < 0+(self.height/2):
+			self.y = 0+(self.height/2)
 
-		if self.x > self.screenWidth-self.width:
-			self.x = self.screenWidth-self.width
-		elif self.x < 0:
-			self.x = 0
+		if self.x > self.screenWidth-(self.width/2):
+			self.x = self.screenWidth-(self.width/2)
+		elif self.x < 0+(self.width/2):
+			self.x = 0+(self.width/2)
 
 	def rotate(self, angle : int) -> None:
 		"""
