@@ -4,7 +4,7 @@ from assets.scripts.characters.spaceship import spaceship
 # Init
 pygame.init()
 
-surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.FULLSCREEN)
+surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h))
 
 SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
