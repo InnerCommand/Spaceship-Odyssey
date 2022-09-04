@@ -1,6 +1,6 @@
 import pygame
 
-class spaceship(pygame.Surface):
+class spaceship:
 	def __init__(self, surface : pygame.Surface, color : tuple[int], screenWidth, screenHeight) -> None:
 		# self.image = image
 		self.surface = surface
