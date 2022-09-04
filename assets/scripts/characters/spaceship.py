@@ -28,7 +28,7 @@ class spaceship:
 
 		# Shooting variables
 		self.shootState = False
-		self.shooter = None
+		self.shooter = []
 
 	def draw(self, surface : pygame.Surface) -> None:
 		"""
@@ -68,10 +68,10 @@ class spaceship:
 		"""
 		Shooting bullets with bullet class
 		"""
-		if self.shooter == None:
-			self.shooter = bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle)
+		if initial: self.shooter.append(bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle))
 
-		self.shootState = self.shooter.shoot(50)
+		for i,_ in enumerate(self.shooter):
+			self.shootState = self.shooter[i].shoot(50)
 
-		if self.shootState == False:
-			self.shooter = None
+			if self.shootState == False:
+				del self.shooter[i]
