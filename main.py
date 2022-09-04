@@ -18,8 +18,6 @@ y1s1 = 0
 y2s1 = -1*SCREENHEIGHT
 y1s2 = 0
 y2s2 = -1*SCREENHEIGHT
-y1s3 = 0
-y2s3 = -1*SCREENHEIGHT
 
 def setBackground(width : int, height : int) -> None:
 	# To set the background to a 'tiled' version of the background, also to make it move
@@ -28,15 +26,11 @@ def setBackground(width : int, height : int) -> None:
 	global y2s1
 	global y1s2
 	global y2s2
-	global y1s3
-	global y2s3
 
 	y1s1 += 5
 	y2s1 += 5
 	y1s2 += 3
 	y2s2 += 3
-	y1s3 += 1
-	y2s3 += 1
 
 	for x in range(0, width, 500):
 		surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,0))
@@ -44,9 +38,6 @@ def setBackground(width : int, height : int) -> None:
 		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y2s1))
 		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y1s2))
 		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y2s2))
-		surface.blit(pygame.image.load(r'./assets/images/background/stars3.png'), (x,y1s3))
-		surface.blit(pygame.image.load(r'./assets/images/background/stars3.png'), (x,y2s3))
-
 	if y1s1 > height:
 		y1s1 = -1*height
 	if y2s1 > height:
@@ -55,10 +46,6 @@ def setBackground(width : int, height : int) -> None:
 		y1s2 = -1*height
 	if y2s2 > height:
 		y2s2 = -1*height
-	if y1s3 > height:
-		y1s3 = -1*height
-	if y2s3 > height:
-		y2s3 = -1*height
 
 # Init Variables
 BLACK = (0, 0, 0)
