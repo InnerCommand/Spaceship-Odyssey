@@ -10,9 +10,14 @@ SCREENHEIGHT = 700
 surface = pygame.display.set_mode(((SCREENWIDTH, SCREENHEIGHT)))
 
 pygame.display.set_caption('Red Planet')
-player = spaceship(surface, (255,0,0), SCREENWIDTH, SCREENHEIGHT)
+player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
 
 running = True
+
+def setBackground(width, height):
+	for y in range(0, height, 500):
+		for x in range(0, width, 500):
+			surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,y))
 
 # Init Variables
 BLACK = (0, 0, 0)
@@ -29,8 +34,8 @@ moveState = {
 # Game loop
 while running:
 	# Updating frames
-	surface.fill(BLACK)
-	player.draw()
+	setBackground(SCREENWIDTH, SCREENHEIGHT)
+	player.draw(surface)
 
 	# Movements
 	if moveState['left'] == True:
