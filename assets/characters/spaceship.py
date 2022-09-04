@@ -11,7 +11,7 @@ class spaceship(pygame.Surface):
 		self.screenHeight = screenHeight
 
 	def draw(self) -> None:
-		rect = pygame.draw.rect(self.surface, self.color, pygame.Rect(self.x,self.y,30,30))
+		pygame.draw.rect(self.surface, self.color, pygame.Rect(self.x,self.y,30,30))
 
 	def moveY(self, yAmt) -> None:
 		self.y += yAmt
