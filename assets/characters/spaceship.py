@@ -25,5 +25,3 @@ class spaceship(pygame.Surface):
 			self.x = self.screenWidth-30
 		elif self.x < 0:
 			self.x = 0
-
-	
