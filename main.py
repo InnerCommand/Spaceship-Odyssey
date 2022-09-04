@@ -15,6 +15,7 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 running = True
 
 def setBackground(width : int, height : int) -> None:
+	# To set the background to a 'tiled' version of the background
 	for y in range(0, height, 500):
 		for x in range(0, width, 500):
 			surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,y))
@@ -26,6 +27,7 @@ ACCELERATION = 5
 ROTATION = 10
 clock = pygame.time.Clock()
 
+# All movestates
 moveState = {
 	'left' : False,
 	'right' : False,
@@ -48,8 +50,11 @@ while running:
 
 	# Check for keypress
 	for event in pygame.event.get():
+		# Check if user quit
 		if event.type == pygame.QUIT:
 			running = False
+
+		# Check for user keypresses
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_UP:
 				moveState['up'] = True
@@ -57,6 +62,8 @@ while running:
 				moveState['right'] = True
 			if event.key == pygame.K_LEFT:
 				moveState['left'] = True
+
+		# Remove movements when key no longer pressed
 		elif event.type == pygame.KEYUP:
 			if event.key == pygame.K_UP:
 				moveState['up'] = False
