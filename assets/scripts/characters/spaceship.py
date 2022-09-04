@@ -1,5 +1,6 @@
 import pygame
 import math
+from assets.scripts.assets.bullet import *
 
 class spaceship:
 	def __init__(self, image : pygame.Surface, width : int, height : int, screenWidth : int, screenHeight : int) -> None:
@@ -24,6 +25,10 @@ class spaceship:
 		# Add total screen sizes for future reference
 		self.screenWidth = screenWidth
 		self.screenHeight = screenHeight
+
+		# Shooting variables
+		self.shootState = False
+		self.shooter = None
 
 	def draw(self, surface : pygame.Surface) -> None:
 		"""
@@ -58,3 +63,15 @@ class spaceship:
 
 		self.angle += angle
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
+
+	def shoot(self, surface : pygame.Surface, initial = False) -> None:
+		"""
+		Shooting bullets with bullet class
+		"""
+		if self.shooter == None:
+			self.shooter = bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle)
+
+		self.shootState = self.shooter.shoot(50)
+
+		if self.shootState == False:
+			self.shooter = None

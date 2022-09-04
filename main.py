@@ -44,7 +44,7 @@ def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y2s1))
 	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y1s2))
 	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y2s2))
-	
+
 	if y1s1 > height:
 		y1s1 = -1*height
 	if y2s1 > height:
@@ -72,6 +72,12 @@ moveState = {
 while running:
 	# Updating frames
 	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
+	# Shooting
+	if player.shootState == True:
+		player.shoot(surface)
+
+	# Draw player
 	player.draw(surface)
 
 	# Movements
@@ -81,10 +87,6 @@ while running:
 		player.rotate(-1*ROTATION)
 	if moveState['up'] == True:
 		player.move(ACCELERATION)
-
-	# Shooting
-	if player.shootState == True:
-		player.shoot(surface)
 
 	# Check for keypress
 	for event in pygame.event.get():
@@ -102,7 +104,7 @@ while running:
 				moveState['left'] = True
 
 			if event.key == pygame.K_SPACE:
-				player.shoot(surface)
+				player.shoot(surface, True)
 
 		# Remove movements when key no longer pressed
 		elif event.type == pygame.KEYUP:
