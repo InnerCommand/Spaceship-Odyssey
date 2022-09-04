@@ -35,11 +35,16 @@ def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 	y1s2 += 3
 	y2s2 += 3
 
-	for x in range(0, width, 500):
-		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y1s1))
-		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y2s1))
-		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y1s2))
-		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y2s2))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y1s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y2s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y1s2))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y2s2))
+
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y1s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y2s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y1s2))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y2s2))
+	
 	if y1s1 > height:
 		y1s1 = -1*height
 	if y2s1 > height:
