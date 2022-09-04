@@ -14,7 +14,6 @@ class spaceship:
 		self.screenHeight = screenHeight
 
 	def draw(self, surface : pygame.Surface) -> None:
-		# self.rect = pygame.draw.rect(self.surface, self.color, pygame.Rect(self.x,self.y,30,30))
 		surface.blit(pygame.transform.rotate(self.image, self.angle), (self.x-(self.rect.width/2), self.y-(self.rect.height/2)))
 
 	def move(self, yAmt : int) -> None:
@@ -25,10 +24,5 @@ class spaceship:
 			self.y = 150
 
 	def rotate(self, angle : int) -> None:
-		# self.x += xAmt
-		# if self.x > self.screenWidth-self.width:
-		# 	self.x = self.screenWidth-self.width
-		# elif self.x < 0:
-		# 	self.x = 0
 		self.angle += angle
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
