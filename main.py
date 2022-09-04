@@ -1,3 +1,4 @@
+from turtle import Screen
 import pygame
 from assets.scripts.characters.spaceship import spaceship
 
@@ -14,11 +15,44 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 
 running = True
 
-def setBackground(width : int, height : int) -> None:
-	# To set the background to a 'tiled' version of the background
-	for y in range(0, height, 500):
-		for x in range(0, width, 500):
-			surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,y))
+y1s1 = 0
+y2s1 = -1*SCREENHEIGHT
+y1s2 = 0
+y2s2 = -1*SCREENHEIGHT
+
+def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
+	# To set the background to a 'tiled' version of the background, also to make it move
+
+	screen.fill((10,10,10))
+
+	global y1s1
+	global y2s1
+	global y1s2
+	global y2s2
+
+	y1s1 += 5
+	y2s1 += 5
+	y1s2 += 3
+	y2s2 += 3
+
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y1s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (0,y2s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y1s2))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (0,y2s2))
+
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y1s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (500,y2s1))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y1s2))
+	surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (500,y2s2))
+
+	if y1s1 > height:
+		y1s1 = -1*height
+	if y2s1 > height:
+		y2s1 = -1*height
+	if y1s2 > height:
+		y1s2 = -1*height
+	if y2s2 > height:
+		y2s2 = -1*height
 
 # Init Variables
 BLACK = (0, 0, 0)
@@ -37,7 +71,13 @@ moveState = {
 # Game loop
 while running:
 	# Updating frames
-	setBackground(SCREENWIDTH, SCREENHEIGHT)
+	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
+	# Shooting
+	if player.shootState == True:
+		player.shoot(surface)
+
+	# Draw player
 	player.draw(surface)
 
 	# Movements
@@ -62,6 +102,9 @@ while running:
 				moveState['right'] = True
 			if event.key == pygame.K_LEFT:
 				moveState['left'] = True
+
+			if event.key == pygame.K_SPACE:
+				player.shoot(surface, True)
 
 		# Remove movements when key no longer pressed
 		elif event.type == pygame.KEYUP:
