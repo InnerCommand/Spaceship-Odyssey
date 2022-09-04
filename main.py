@@ -14,7 +14,7 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 
 running = True
 
-def setBackground(width, height):
+def setBackground(width : int, height : int) -> None:
 	for y in range(0, height, 500):
 		for x in range(0, width, 500):
 			surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,y))
@@ -39,13 +39,13 @@ while running:
 
 	# Movements
 	if moveState['left'] == True:
-		player.moveX(-5)
+		player.rotate(10)
 	if moveState['right'] == True:
-		player.moveX(5)
+		player.rotate(-10)
 	if moveState['up'] == True:
-		player.moveY(-5)
+		player.move(-5)
 	if moveState['down'] == True:
-		player.moveY(5)
+		player.move(5)
 
 	# Check for keypress
 	for event in pygame.event.get():
