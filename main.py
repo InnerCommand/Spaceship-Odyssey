@@ -23,7 +23,7 @@ def setBackground(width : int, height : int) -> None:
 # Init Variables
 BLACK = (0, 0, 0)
 FPS = 30
-ACCELERATION = 5
+ACCELERATION = 12
 ROTATION = 10
 clock = pygame.time.Clock()
 
