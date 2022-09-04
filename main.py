@@ -29,8 +29,7 @@ clock = pygame.time.Clock()
 moveState = {
 	'left' : False,
 	'right' : False,
-	'up' : False,
-	'down' : False
+	'up' : False
 }
 
 # Game loop
@@ -45,8 +44,6 @@ while running:
 	if moveState['right'] == True:
 		player.rotate(-1*ROTATION)
 	if moveState['up'] == True:
-		player.move(-1*ACCELERATION)
-	if moveState['down'] == True:
 		player.move(ACCELERATION)
 
 	# Check for keypress
@@ -60,13 +57,9 @@ while running:
 				moveState['right'] = True
 			if event.key == pygame.K_LEFT:
 				moveState['left'] = True
-			if event.key == pygame.K_DOWN:
-				moveState['down'] = True
 		elif event.type == pygame.KEYUP:
 			if event.key == pygame.K_UP:
 				moveState['up'] = False
-			if event.key == pygame.K_DOWN:
-				moveState['down'] = False
 			if event.key == pygame.K_LEFT:
 				moveState['left'] = False
 			if event.key == pygame.K_RIGHT:

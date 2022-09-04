@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class spaceship:
 	def __init__(self, image : pygame.Surface, width : int, height : int, screenWidth : int, screenHeight : int) -> None:
@@ -16,12 +17,17 @@ class spaceship:
 	def draw(self, surface : pygame.Surface) -> None:
 		surface.blit(pygame.transform.rotate(self.image, self.angle), (self.x-(self.rect.width/2), self.y-(self.rect.height/2)))
 
-	def move(self, yAmt : int) -> None:
-		self.y += yAmt
+	def move(self, amt : int) -> None:
+		self.y += math.cos(math.radians(self.angle)) * (-1*amt)
+		self.x += math.sin(math.radians(self.angle)) * (-1*amt)
 		if self.y > self.screenHeight-self.height:
 			self.y = self.screenHeight-self.height
 		elif self.y < 150:
 			self.y = 150
+		if self.x > self.screenWidth-self.width:
+			self.x = self.screenWidth-self.width
+		elif self.x < 0:
+			self.x = 0
 
 	def rotate(self, angle : int) -> None:
 		self.angle += angle
