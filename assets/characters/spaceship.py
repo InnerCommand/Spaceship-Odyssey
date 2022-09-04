@@ -5,13 +5,13 @@ class spaceship:
 		# self.image = image
 		self.surface = surface
 		self.color = color
-		self.x = (screenWidth/2)-30
-		self.y = (screenHeight-50)-30
+		self.x = (screenWidth/2)-15
+		self.y = (screenHeight-50)-15
 		self.screenWidth = screenWidth
 		self.screenHeight = screenHeight
 
 	def draw(self) -> None:
-		pygame.draw.rect(self.surface, self.color, pygame.Rect(self.x,self.y,30,30))
+		self.rect = pygame.draw.rect(self.surface, self.color, pygame.Rect(self.x,self.y,30,30))
 
 	def moveY(self, yAmt) -> None:
 		self.y += yAmt
