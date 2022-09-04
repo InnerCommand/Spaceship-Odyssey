@@ -14,11 +14,51 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 
 running = True
 
+y1s1 = 0
+y2s1 = -1*SCREENHEIGHT
+y1s2 = 0
+y2s2 = -1*SCREENHEIGHT
+y1s3 = 0
+y2s3 = -1*SCREENHEIGHT
+
 def setBackground(width : int, height : int) -> None:
-	# To set the background to a 'tiled' version of the background
-	for y in range(0, height, 500):
-		for x in range(0, width, 500):
-			surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,y))
+	# To set the background to a 'tiled' version of the background, also to make it move
+
+	global y1s1
+	global y2s1
+	global y1s2
+	global y2s2
+	global y1s3
+	global y2s3
+
+	y1s1 += 5
+	y2s1 += 5
+	y1s2 += 3
+	y2s2 += 3
+	y1s3 += 1
+	y2s3 += 1
+
+	for x in range(0, width, 500):
+		surface.blit(pygame.image.load(r'./assets/images/background/background.png'), (x,0))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y1s1))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars1.png'), (x,y2s1))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y1s2))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars2.png'), (x,y2s2))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars3.png'), (x,y1s3))
+		surface.blit(pygame.image.load(r'./assets/images/background/stars3.png'), (x,y2s3))
+
+	if y1s1 > height:
+		y1s1 = -1*height
+	if y2s1 > height:
+		y2s1 = -1*height
+	if y1s2 > height:
+		y1s2 = -1*height
+	if y2s2 > height:
+		y2s2 = -1*height
+	if y1s3 > height:
+		y1s3 = -1*height
+	if y2s3 > height:
+		y2s3 = -1*height
 
 # Init Variables
 BLACK = (0, 0, 0)
@@ -48,6 +88,10 @@ while running:
 	if moveState['up'] == True:
 		player.move(ACCELERATION)
 
+	# Shooting
+	if player.shootState == True:
+		player.shoot(surface)
+
 	# Check for keypress
 	for event in pygame.event.get():
 		# Check if user quit
@@ -62,6 +106,9 @@ while running:
 				moveState['right'] = True
 			if event.key == pygame.K_LEFT:
 				moveState['left'] = True
+
+			if event.key == pygame.K_SPACE:
+				player.shoot(surface)
 
 		# Remove movements when key no longer pressed
 		elif event.type == pygame.KEYUP:
