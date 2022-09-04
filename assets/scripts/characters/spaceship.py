@@ -70,8 +70,8 @@ class spaceship:
 		"""
 		if initial: self.shooter.append(bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle))
 
-		for i,_ in enumerate(self.shooter):
-			self.shootState = self.shooter[i].shoot(50)
+		for i in self.shooter:
+			self.shootState = i.shoot(25)
 
 			if self.shootState == False:
-				del self.shooter[i]
+				del i
