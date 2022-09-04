@@ -22,6 +22,8 @@ def setBackground(width : int, height : int) -> None:
 # Init Variables
 BLACK = (0, 0, 0)
 FPS = 30
+ACCELERATION = 5
+ROTATION = 10
 clock = pygame.time.Clock()
 
 moveState = {
@@ -39,13 +41,13 @@ while running:
 
 	# Movements
 	if moveState['left'] == True:
-		player.rotate(10)
+		player.rotate(ROTATION)
 	if moveState['right'] == True:
-		player.rotate(-10)
+		player.rotate(-1*ROTATION)
 	if moveState['up'] == True:
-		player.move(-5)
+		player.move(-1*ACCELERATION)
 	if moveState['down'] == True:
-		player.move(5)
+		player.move(ACCELERATION)
 
 	# Check for keypress
 	for event in pygame.event.get():
