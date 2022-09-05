@@ -1,5 +1,6 @@
 # Spaceship Odyssey
-PyWeek 34 - Theme: Red Planet  
+**PyWeek 34**   
+**Theme:** Red Planet  
 ***
 
 ## Installation
