@@ -48,7 +48,7 @@ class enemy(spaceship):
 		self.draw(surface)
 
 class trackingEnemy(enemy):
-	def moveToPlayer(self, surface: pygame.Surface, player : spaceship, speed : int = 20) -> None:
+	def moveToPlayer(self, surface: pygame.Surface, player : spaceship) -> None:
 		"""
 		Follow player (direction and location) until death
 		"""
@@ -58,8 +58,8 @@ class trackingEnemy(enemy):
 		diffY = player.y - self.y
 
 		# Make the enemy move towards the player with the set speed
-		self.x += diffX/speed
-		self.y += diffY/speed
+		self.x += diffX/self.speed
+		self.y += diffY/self.speed
 
 		# Make the enemy face the player
 		self.angle = (180 if player.y >= self.y else 0)+math.degrees(math.atan(diffX / diffY))
