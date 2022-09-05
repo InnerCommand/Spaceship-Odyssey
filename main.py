@@ -125,7 +125,6 @@ while running:
 		if event.type == pygame.VIDEORESIZE:
 			SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 			player.resize(SCREENWIDTH, SCREENHEIGHT)
-			newTracerEnemy.resize(SCREENWIDTH, SCREENHEIGHT)
 
 	# Updates
 	pygame.display.flip()

@@ -13,6 +13,8 @@ class enemy(spaceship):
 		self.image = pygame.transform.scale(image, (width, height))
 		self.rect = image.get_rect()
 		self.speed = speed
+		self.width = width
+		self.height = height
 
 		# Set position of enemy
 		self.x = x
