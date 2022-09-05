@@ -22,11 +22,23 @@ class enemy(spaceship):
 		self.screenWidth = screenWidth
 		self.screenHeight = screenHeight
 
+class trackingEnemy(enemy):
 	def moveToPlayer(self, surface: pygame.Surface, player : spaceship, speed : int = 20):
+		"""
+		Follow player (direction and location)
+		"""
+
+		# Calculate the distance difference between the player and the enemy
 		diffX = player.x - self.x
 		diffY = player.y - self.y
+
+		# Make the enemy move towards the player with the set speed
 		self.x += diffX/speed
 		self.y += diffY/speed
+
+		# Make the enemy face the player
 		self.angle = (180 if player.y >= self.y else 0)+math.degrees(math.atan(diffX / diffY))
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
+
+		# Draw the enemy
 		self.draw(surface)
