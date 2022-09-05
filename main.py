@@ -59,7 +59,8 @@ clock = pygame.time.Clock()
 moveState = {
 	'left' : False,
 	'right' : False,
-	'up' : False
+	'up' : False,
+	'shoot' : False
 }
 
 # Game loop
@@ -81,6 +82,8 @@ while running:
 		player.rotate(-1*ROTATION)
 	if moveState['up'] == True:
 		player.move(ACCELERATION)
+	if moveState['shoot'] == True:
+		player.shoot(surface, True)
 
 	# Check for keypress
 	for event in pygame.event.get():
@@ -98,7 +101,7 @@ while running:
 				moveState['left'] = True
 
 			if event.key == pygame.K_SPACE:
-				player.shoot(surface, True)
+				moveState['shoot'] = True
 
 		# Remove movements when key no longer pressed
 		elif event.type == pygame.KEYUP:
@@ -108,6 +111,9 @@ while running:
 				moveState['left'] = False
 			if event.key == pygame.K_RIGHT:
 				moveState['right'] = False
+
+			if event.key == pygame.K_SPACE:
+				moveState['shoot'] = False
 
 	# Updates
 	pygame.display.flip()
