@@ -5,7 +5,7 @@ from assets.scripts.characters.enemy import enemy, trackingEnemy
 # Init
 pygame.init()
 
-surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h))
+surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.RESIZABLE)
 
 SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
@@ -68,9 +68,6 @@ moveState = {
 
 # Game loop
 while running:
-	# Update screen stats
-	SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
-
 	# Updating frames
 	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
 
@@ -123,6 +120,12 @@ while running:
 
 			if event.key == pygame.K_SPACE:
 				moveState['shoot'] = False
+
+		# Check if game has resized
+		if event.type == pygame.VIDEORESIZE:
+			SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
+			player.resize(SCREENWIDTH, SCREENHEIGHT)
+			newTracerEnemy.resize(SCREENWIDTH, SCREENHEIGHT)
 
 	# Updates
 	pygame.display.flip()

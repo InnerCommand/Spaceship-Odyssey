@@ -75,3 +75,23 @@ class spaceship:
 
 			if self.shootState == False:
 				del i
+
+	def resize(self, screenWidth : int, screenHeight : int) -> None:
+		"""
+		Deal with resize of screen
+		"""
+
+		# Update screen width and height values
+		self.screenWidth = screenWidth
+		self.screenHeight = screenHeight
+
+		# Check if user is off edges, if so, relocate user
+		if self.y > self.screenHeight-(self.height/2):
+			self.y = self.screenHeight-(self.height/2)
+		elif self.y < 0+(self.height/2):
+			self.y = 0+(self.height/2)
+
+		if self.x > self.screenWidth-(self.width/2):
+			self.x = self.screenWidth-(self.width/2)
+		elif self.x < 0+(self.width/2):
+			self.x = 0+(self.width/2)
