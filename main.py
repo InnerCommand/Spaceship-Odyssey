@@ -12,7 +12,7 @@ SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 pygame.display.set_caption('Red Planet')
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
 newEnemy = enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player) 
-newTracerEnemy = trackingEnemy(pygame.image.load(r'./assets/images/characters/enemy.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)
+newTracerEnemy = trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)
 
 running = True
 
