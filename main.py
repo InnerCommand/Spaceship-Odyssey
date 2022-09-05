@@ -1,5 +1,6 @@
 import pygame
 from assets.scripts.characters.spaceship import spaceship
+from assets.scripts.characters.enemy import enemy
 
 # Init
 pygame.init()
@@ -10,6 +11,7 @@ SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
 pygame.display.set_caption('Red Planet')
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
+newEnemy = enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), SCREENWIDTH/2, 60, 50, 50, SCREENWIDTH, SCREENHEIGHT) # def __init__(self, image : pygame.Surface, x : int, y : int, width : int, height : int, screenWidth : int, screenHeight : int)
 
 running = True
 
@@ -74,6 +76,8 @@ while running:
 
 	# Draw player
 	player.draw(surface)
+
+	newEnemy.moveToPlayer(surface,player)
 
 	# Movements
 	if moveState['left'] == True:
