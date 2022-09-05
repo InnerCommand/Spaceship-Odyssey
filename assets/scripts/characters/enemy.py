@@ -1,5 +1,4 @@
 import pygame
-import mpmath 
 import math
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.assets.bullet import bullet
