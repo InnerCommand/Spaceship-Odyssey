@@ -1,6 +1,6 @@
 import pygame
 from assets.scripts.characters.spaceship import spaceship
-from assets.scripts.characters.enemy import enemy
+from assets.scripts.characters.enemy import enemy, trackingEnemy
 
 # Init
 pygame.init()
@@ -11,7 +11,8 @@ SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
 pygame.display.set_caption('Red Planet')
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
-newEnemy = enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), SCREENWIDTH/2+180, 60, 50, 50, SCREENWIDTH, SCREENHEIGHT) # def __init__(self, image : pygame.Surface, x : int, y : int, width : int, height : int, screenWidth : int, screenHeight : int)
+newEnemy = enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player) 
+newTracerEnemy = trackingEnemy(pygame.image.load(r'./assets/images/characters/enemy.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)
 
 running = True
 
@@ -67,6 +68,9 @@ moveState = {
 
 # Game loop
 while running:
+	# Update screen stats
+	SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
+
 	# Updating frames
 	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
 
@@ -77,7 +81,8 @@ while running:
 	# Draw player
 	player.draw(surface)
 
-	newEnemy.moveToPlayer(surface,player)
+	newEnemy.moveToPlayer(surface)
+	newTracerEnemy.moveToPlayer(surface,player)
 
 	# Movements
 	if moveState['left'] == True:
