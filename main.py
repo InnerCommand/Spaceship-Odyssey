@@ -5,7 +5,7 @@ from assets.scripts.characters.enemy import enemy, trackingEnemy
 # Init
 pygame.init()
 
-surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h))
+surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.RESIZABLE)
 
 SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
