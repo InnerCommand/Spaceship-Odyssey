@@ -1,5 +1,6 @@
 import pygame
-import math 
+import mpmath 
+import math
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.assets.bullet import bullet
 
@@ -27,7 +28,6 @@ class enemy(spaceship):
 		diffY = player.y - self.y
 		self.x += diffX/speed
 		self.y += diffY/speed
-		self.angle = 360-math.atan(diffX / diffY)
+		self.angle = (180 if player.y >= self.y else 0)+math.degrees(math.atan(diffX / diffY))
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
-		print(self.angle)
 		self.draw(surface)
