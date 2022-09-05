@@ -1,4 +1,4 @@
-# PyWeek 34
+# Spaceship Odyssey
 PyWeek 34 - Theme: Red Planet  
 ***
 
@@ -6,10 +6,11 @@ PyWeek 34 - Theme: Red Planet
 - [realhuman](https://pyweek.org/u/realhuman/):
   - Team Leader
   - Code
+  - Storyline
 
-- [Maya](https://github.com/mayahkg):
+- [Maya](https://pyweek.org/u/mayahkg/):
   - Code
-  - Art
+  - Storyline
 
 - Robbels:
   - Art
