@@ -102,7 +102,7 @@ while running:
 			removedEnemies.append(i)
 	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
 
-	#rectangle timer
+	# Rectangle side timer
 	current_time = time.time()
 	time_past = timer - current_time
 	y = time_past 
