@@ -14,7 +14,7 @@ if SCREENHEIGHT > 700:
 	surface = pygame.display.set_mode((pygame.display.Info().current_w, 700))
 	SCREENHEIGHT = 700
 
-pygame.display.set_caption('Red Planet')
+pygame.display.set_caption('Spaceship Odyssey')
 
 # Create new characters
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
