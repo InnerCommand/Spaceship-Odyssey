@@ -14,6 +14,8 @@ if SCREENHEIGHT > 700:
 	SCREENHEIGHT = 700
 
 pygame.display.set_caption('Red Planet')
+
+# Create new characters
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
 enemies = [enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)] 
 trackingEnemies = [trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)]
