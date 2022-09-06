@@ -37,11 +37,21 @@ class planet:
 
 	def animateDown(self, surface : pygame.Surface, speed : int = 5) -> None:
 		"""
-		Animate planet from top of screen to bottom
+		Animate planet from top of screen to middle
 		"""
 		self.rotate(5)
 		if self.y < self.screenHeight/2:
 			self.y += speed
+
+		self.draw(surface)
+
+	def animateUp(self, surface : pygame.Surface, speed : int = 5) -> None:
+		"""
+		Animate planet from middle of screen back to top
+		"""
+		self.rotate(5)
+		if self.y >  (-1*self.height)/2:
+			self.y -= speed
 
 		self.draw(surface)
 
