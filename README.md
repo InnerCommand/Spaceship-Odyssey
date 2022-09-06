@@ -12,6 +12,7 @@ To run code, run `main.py`
   - Team Leader
   - Code
   - Storyline
+  - Testing
 
 - [Maya](https://pyweek.org/u/mayahkg/):
   - Code
