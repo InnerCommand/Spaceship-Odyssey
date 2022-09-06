@@ -14,9 +14,11 @@ if SCREENHEIGHT > 700:
 	SCREENHEIGHT = 700
 
 pygame.display.set_caption('Red Planet')
+
+# Create new characters
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
-newEnemy = enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player) 
-newTracerEnemy = trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)
+enemies = [enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)] 
+trackingEnemies = [trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)]
 
 running = True
 
@@ -82,8 +84,20 @@ while running:
 	# Draw player
 	player.draw(surface)
 
-	newEnemy.moveToPlayer(surface)
-	newTracerEnemy.moveToPlayer(surface,player)
+	removedEnemies = []
+	for i in enemies:
+		i.moveToPlayer(surface)
+		player.checkHit(i)
+		if player.checkHit(i):
+			removedEnemies.append(i)
+	enemies = [i for i in enemies if i not in removedEnemies]
+
+	removedEnemies = []
+	for i in trackingEnemies:
+		i.moveToPlayer(surface, player)
+		if player.checkHit(i):
+			removedEnemies.append(i)
+	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
 
 	# Movements
 	if moveState['left'] == True:

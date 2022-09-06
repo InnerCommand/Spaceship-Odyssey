@@ -36,6 +36,10 @@ class enemy(spaceship):
 		self.screenWidth = screenWidth
 		self.screenHeight = screenHeight
 
+		# Shooting variables
+		self.shootState = False
+		self.shooter = []
+
 	def moveToPlayer(self, surface: pygame.Surface) -> None:
 		"""
 		Follow the player's direction on spawn
