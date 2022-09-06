@@ -2,6 +2,7 @@ import pygame
 import time
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.characters.enemy import enemy, trackingEnemy
+from assets.scripts.assets.planet import planet
 
 # Init
 pygame.init()
