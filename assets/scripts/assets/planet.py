@@ -44,3 +44,9 @@ class planet:
 			self.y += speed
 
 		self.draw(surface)
+
+	def reset(self) -> None:
+		"""
+		Resets Y pos
+		"""
+		self.y = 0
