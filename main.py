@@ -105,9 +105,8 @@ while running:
 	# Rectangle side timer
 	current_time = time.time()
 	time_past = timer - current_time
-	y = time_past 
 	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect(45, 190, 50, 290))
-	pygame.draw.rect(surface, (0, 255, 0), pygame.Rect(50, 465+y, 40, 10-y))
+	pygame.draw.rect(surface, (0, 255, 0), pygame.Rect(50, 465+time_past, 40, 10-time_past))
 
 	# Movements
 	if moveState['left'] == True:
