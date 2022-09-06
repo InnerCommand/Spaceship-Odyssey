@@ -16,6 +16,7 @@ To run code, run `main.py`
 - [Maya](https://pyweek.org/u/mayahkg/):
   - Code
   - Storyline
+  - Art
 
 - Robbels:
   - Art
