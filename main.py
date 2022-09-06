@@ -63,7 +63,7 @@ BLACK = (0, 0, 0)
 FPS = 30
 ACCELERATION = 12
 ROTATION = 10
-TIMERINIT = 20
+TIMERINIT = 10
 timerSpeed = 30
 clock = pygame.time.Clock()
 
