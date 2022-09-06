@@ -22,6 +22,8 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 enemies = [enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)] 
 trackingEnemies = [trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)]
 
+redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
+
 running = True
 
 y1s1 = 0
@@ -111,11 +113,12 @@ while running:
 	amtMove = time_past*timerSpeed
 
 	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
-	print(TIMERINIT-amtMove)
 	if abs(TIMERINIT-amtMove) <= 280:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERINIT)+amtMove), (40, TIMERINIT-amtMove)))
 	else:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
+
+		redPlanet.animateDown(surface)
 
 	# Movements
 	if moveState['left'] == True:

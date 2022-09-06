@@ -14,7 +14,7 @@ class planet:
 
 		# Set positioning variables
 		self.x = screenWidth/2
-		self.y = 0
+		self.y = (-1*height)/2
 		self.angle = 0
 
 		# Set screen status variables
@@ -35,10 +35,12 @@ class planet:
 		self.angle += angle
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
 
-	def animateDown(self, speed : int = 5) -> None:
+	def animateDown(self, surface : pygame.Surface, speed : int = 5) -> None:
 		"""
 		Animate planet from top of screen to bottom
 		"""
 		self.rotate(5)
 		if self.y < self.screenHeight/2:
 			self.y += speed
+
+		self.draw(surface)
