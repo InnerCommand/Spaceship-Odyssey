@@ -99,4 +99,5 @@ class spaceship:
 	def checkHit(self, enemy) -> bool:
 		for i in self.shooter:
 			if (enemy.x-enemy.width <= i.x <= enemy.x+enemy.width) and (enemy.y-enemy.height <= i.y <= enemy.y+enemy.height):
+				del i
 				return True
