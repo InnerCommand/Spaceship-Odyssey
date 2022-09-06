@@ -5,9 +5,13 @@ from assets.scripts.characters.enemy import enemy, trackingEnemy
 # Init
 pygame.init()
 
-surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.RESIZABLE)
+surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h))
 
 SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
+
+if SCREENHEIGHT > 700:
+	surface = pygame.display.set_mode((pygame.display.Info().current_w, 700))
+	SCREENHEIGHT = 700
 
 pygame.display.set_caption('Red Planet')
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
