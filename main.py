@@ -1,4 +1,5 @@
 import pygame
+import time
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.characters.enemy import enemy, trackingEnemy
 
@@ -71,6 +72,8 @@ moveState = {
 	'up' : False,
 	'shoot' : False
 }
+#timer
+timer = time.time()
 
 # Game loop
 while running:
@@ -98,6 +101,13 @@ while running:
 		if player.checkHit(i):
 			removedEnemies.append(i)
 	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
+
+	#rectangle timer
+	current_time = time.time()
+	time_past = timer - current_time
+	y = time_past 
+	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect(45, 190, 50, 290))
+	pygame.draw.rect(surface, (0, 255, 0), pygame.Rect(50, 465+y, 40, 10-y))
 
 	# Movements
 	if moveState['left'] == True:
