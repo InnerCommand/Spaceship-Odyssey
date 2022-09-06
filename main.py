@@ -63,6 +63,7 @@ BLACK = (0, 0, 0)
 FPS = 30
 ACCELERATION = 12
 ROTATION = 10
+TIMERSPEED = 20
 clock = pygame.time.Clock()
 
 # All movestates
@@ -105,8 +106,11 @@ while running:
 	# Rectangle side timer
 	current_time = time.time()
 	time_past = timer - current_time
-	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect(45, 190, 50, 290))
-	pygame.draw.rect(surface, (0, 255, 0), pygame.Rect(50, 465+time_past, 40, 10-time_past))
+	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
+	if TIMERSPEED-time_past <= 270:
+		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERSPEED)+time_past), (40, TIMERSPEED-time_past)))
+	else:
+		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 465+time_past), (40, 270)))
 
 	# Movements
 	if moveState['left'] == True:
