@@ -70,7 +70,7 @@ FPS = 30
 ACCELERATION = 12
 ROTATION = 10
 TIMERINIT = 10
-timerSpeed = 30
+timerSpeed = 20
 clock = pygame.time.Clock()
 
 # All movestates
@@ -126,7 +126,7 @@ while running:
 	current_time = time.time()
 	time_past = timer - current_time
 	amtMove = time_past*timerSpeed
-	enemyTimePast = enemyTimer - current_time
+	enemyTimePast = current_time - enemyTimer
 
 	# Spawn enemies based on time
 	if enemyTimePast >= waitTime:
