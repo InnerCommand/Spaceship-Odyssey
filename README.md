@@ -1,11 +1,26 @@
 # Spaceship Odyssey
-**PyWeek 34**   
-**Theme:** Red Planet  
-***
+A team entry to the "Red Planet" themed [PyWeek 34](https://pyweek.org/34/) - You can view the entry [here](https://pyweek.org/e/deploydev/)
 
-## Installation
-To install packages, run `pip install -r requirements.txt` while you are in this folder.  
-To run code, run `main.py`
+## About
+This game is meant to be an infinite space game where you fly through space, shooting enemies in an attempt to get a high level
+
+## Play Instructions
+To play the game, please run the following commands:
+```
+pip install -r requirements.txt
+python run_game.py
+```
+Or if this fails to work
+```
+pip3 install -r requirements.txt
+python3 run_game.py
+```
+
+## Controls
+- **Up arrow key** to move forwards
+- **Left arrow key** to rotate left
+- **Right arrow key** to rotate right
+- **Space key** to shoot
 
 ## Credits
 - [realhuman](https://pyweek.org/u/realhuman/):
