@@ -96,6 +96,7 @@ while running:
 	# Draw player
 	player.draw(surface)
 
+	# Update and draw enemies
 	removedEnemies = []
 	for i in enemies:
 		i.moveToPlayer(surface)
