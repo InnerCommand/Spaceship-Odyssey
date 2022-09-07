@@ -7,15 +7,19 @@ from assets.scripts.assets.planet import planet
 
 # Init
 pygame.init()
+pygame.font.init()
 
+# Set screen
 surface = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h))
 
+# Get screen sizing
 SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 
 if SCREENHEIGHT > 700:
 	surface = pygame.display.set_mode((pygame.display.Info().current_w, 700))
 	SCREENHEIGHT = 700
 
+# Set title of window
 pygame.display.set_caption('Spaceship Odyssey')
 
 # Create new characters
@@ -23,17 +27,23 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 enemies = [] 
 trackingEnemies = []
 
+# Set player health stats
 health = 100
 dmgTaken = 3
 
+# Set wait time for enemy spawn
 waitTime = .5
 
+# Create new red planet
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
 
+# Set enemies to no longer pause
 pauseEnemies = False
 
+# Set running variable for game loop
 running = True
 
+# Set background variables
 y1s1 = 0
 y2s1 = -1*SCREENHEIGHT
 y1s2 = 0
@@ -69,13 +79,14 @@ def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 	if y2s2 > height:
 		y2s2 = -1*height
 
-# Init Variables
-BLACK = (0, 0, 0)
+# Set speeds of how things will run
 FPS = 30
 ACCELERATION = 12
 ROTATION = 10
 TIMERINIT = 10
 timerSpeed = 20
+
+# Set clock
 clock = pygame.time.Clock()
 
 # All movestates
@@ -85,9 +96,21 @@ moveState = {
 	'up' : False,
 	'shoot' : False
 }
+
 # Timer
 timer = time.time()
 enemyTimer = time.time()
+
+# Starting page
+startingPageShow = True
+
+while startingPageShow:
+	# Add starting page background to screen
+	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
+	# Update frames
+	pygame.display.flip()
+	clock.tick(FPS)
 
 # Game loop
 while running:
@@ -163,6 +186,7 @@ while running:
 	# Rectangle side timer
 	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
 	if abs(TIMERINIT-amtMove) <= 280:
+		# Draw timers
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERINIT)+amtMove), (40, TIMERINIT-amtMove)))
 	else:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
@@ -176,6 +200,7 @@ while running:
 		else:
 			redPlanet.animateUp(surface)
 			if redPlanet.animationStat['up'] == True:
+				# Reset timers
 				timer = time.time()
 				redPlanet.reset()
 
