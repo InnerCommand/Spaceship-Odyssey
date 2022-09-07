@@ -248,8 +248,13 @@ while running:
 		if redPlanet.animationStat['down'] == False:
 			redPlanet.animateDown(surface)
 		else:
+			# Show level notification
 			planetPause = showLevelText(surface, level)
+
+			# Animate planet
 			redPlanet.animateThrough(surface)
+
+			# Check if planet and level notification has finished animating
 			if redPlanet.animationStat['through'] == True and planetPause == True:
 				# Reset timers
 				timer = time.time()
