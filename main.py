@@ -132,14 +132,21 @@ while running:
 
 	# Spawn enemies based on time
 	if enemyTimePast >= waitTime and not pauseEnemies:
+		# Spawn normal enemies
 		amtEnemies = random.randint(1,3)
 		for i in range(amtEnemies):
 			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		
+		# Spawn tracking enemies
 		amtEnemies = random.randint(0,2)
 		for i in range(amtEnemies):
 			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		
+		# Update timers
 		waitTime = random.uniform(.5,2)
 		enemyTimer = time.time()
+	
+	# Prevent enemies from spawning when paused
 	elif pauseEnemies:
 		waitTime = random.uniform(1,2.5)
 		enemyTimer = time.time()
