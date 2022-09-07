@@ -266,12 +266,22 @@ while running:
 				# Update level
 				level += 1
 
+				# Update speed
+				ACCELERATION += 5
+				ROTATION += 5
+
+				# Update health
+				health += 10
+
 	# Draw side text
 	healthText = font.render("HEALTH: " + str(health), False, WHITE)
-	surface.blit(healthText, (20, SCREENHEIGHT-40))
+	surface.blit(healthText, (20, SCREENHEIGHT-20))
 
 	levelText = font.render("LEVEL: " + str(level), False, WHITE)
-	surface.blit(levelText, (20, SCREENHEIGHT-20))
+	surface.blit(levelText, (20, SCREENHEIGHT-40))
+
+	speedText = font.render("SPEED: " + str(ACCELERATION), False, WHITE)
+	surface.blit(speedText, (20, SCREENHEIGHT-60))
 
 	# Check for keypress
 	for event in pygame.event.get():
