@@ -107,6 +107,16 @@ while running:
 			removedEnemies.append(i)
 	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
 
+	# Movements
+	if moveState['left'] == True:
+		player.rotate(ROTATION)
+	if moveState['right'] == True:
+		player.rotate(-1*ROTATION)
+	if moveState['up'] == True:
+		player.move(ACCELERATION)
+	if moveState['shoot'] == True:
+		player.shoot(surface, True)
+
 	# Rectangle side timer
 	current_time = time.time()
 	time_past = timer - current_time
@@ -122,17 +132,6 @@ while running:
 			redPlanet.animateDown(surface)
 		else:
 			redPlanet.animateUp(surface)
-
-
-	# Movements
-	if moveState['left'] == True:
-		player.rotate(ROTATION)
-	if moveState['right'] == True:
-		player.rotate(-1*ROTATION)
-	if moveState['up'] == True:
-		player.move(ACCELERATION)
-	if moveState['shoot'] == True:
-		player.shoot(surface, True)
 
 	# Check for keypress
 	for event in pygame.event.get():
