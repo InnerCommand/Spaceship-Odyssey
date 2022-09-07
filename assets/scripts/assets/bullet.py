@@ -50,6 +50,3 @@ class bullet:
 			return False
 
 		return True
-
-class playerBullet(bullet):
-	pass
