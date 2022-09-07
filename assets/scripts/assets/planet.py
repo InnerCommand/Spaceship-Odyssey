@@ -69,6 +69,10 @@ class planet:
 
 	def reset(self) -> None:
 		"""
-		Resets Y pos
+		Resets all variables
 		"""
 		self.y = 0
+		self.animationStat = {
+			"down" : False,
+			"up" : False
+		}

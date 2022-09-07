@@ -149,6 +149,9 @@ while running:
 			redPlanet.animateDown(surface)
 		else:
 			redPlanet.animateUp(surface)
+			if redPlanet.animationStat['up'] == True:
+				timer = time.time()
+				redPlanet.reset()
 
 	# Check for keypress
 	for event in pygame.event.get():
