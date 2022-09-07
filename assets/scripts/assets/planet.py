@@ -24,7 +24,7 @@ class planet:
 		# Set animation variables
 		self.animationStat = {
 			"down" : False,
-			"up" : False
+			"through" : False
 		}
 
 	def draw(self, surface : pygame.Surface) -> None:
@@ -46,7 +46,7 @@ class planet:
 		Animate planet from top of screen to middle
 		"""
 		self.rotate(5)
-		if self.y < self.screenHeight/2:
+		if self.y < self.screenHeight/2+(self.height/2):
 			self.y += speed
 
 			self.animationStat['down'] = False
@@ -54,16 +54,16 @@ class planet:
 
 		self.draw(surface)
 
-	def animateUp(self, surface : pygame.Surface, speed : int = 5) -> None:
+	def animateThrough(self, surface : pygame.Surface, speed : int = 5) -> None:
 		"""
-		Animate planet from middle of screen back to top
+		Animate planet from middle of screen to bottom
 		"""
 		self.rotate(5)
-		if self.y > (-1*self.height)/2:
-			self.y -= speed
+		if self.y < self.screenHeight+(self.height/2):
+			self.y += speed
 			
-			self.animationStat['up'] = False
-		else: self.animationStat['up'] = True
+			self.animationStat['through'] = False
+		else: self.animationStat['through'] = True
 
 		self.draw(surface)
 
@@ -74,5 +74,5 @@ class planet:
 		self.y = 0
 		self.animationStat = {
 			"down" : False,
-			"up" : False
+			"through" : False
 		}

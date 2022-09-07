@@ -33,12 +33,14 @@ dmgTaken = 3
 
 # Set level variables
 level = 1
+levelNotificationY = 0
 
 # Set wait time for enemy spawn
 waitTime = .5
 
-# Create new red planet
+# Planet variables
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
+planetPause = True
 
 # Set enemies to no longer pause
 pauseEnemies = False
@@ -84,6 +86,24 @@ def setBackground(width : int, height : int, screen : pygame.Surface) -> None:
 		y1s2 = -1*height
 	if y2s2 > height:
 		y2s2 = -1*height
+
+def showLevelText(surface : pygame.Surface, level : int, speed : int = 5) -> bool:
+	# To display the level text
+
+	font = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
+
+	global levelNotificationY
+
+	text = font.render(f'Level {level+1}', True, (255,255,255))
+	surface.blit(text, text.get_rect(center=(SCREENWIDTH/2, levelNotificationY)))
+
+	if levelNotificationY < SCREENHEIGHT:
+		levelNotificationY += speed
+	else:
+		levelNotificationY = 0
+		return True
+
+	return False
 
 # Set speeds of how things will run
 FPS = 30
@@ -197,12 +217,12 @@ while running:
 		# Spawn normal enemies
 		amtEnemies = random.randint(1,3)
 		for i in range(amtEnemies):
-			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
 		
 		# Spawn tracking enemies
 		amtEnemies = random.randint(0,2)
 		for i in range(amtEnemies):
-			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
 		
 		# Update timers
 		waitTime = random.uniform(.5,2)
@@ -228,14 +248,18 @@ while running:
 		if redPlanet.animationStat['down'] == False:
 			redPlanet.animateDown(surface)
 		else:
-			redPlanet.animateUp(surface)
-			if redPlanet.animationStat['up'] == True:
+			planetPause = showLevelText(surface, level)
+			redPlanet.animateThrough(surface)
+			if redPlanet.animationStat['through'] == True and planetPause == True:
 				# Reset timers
 				timer = time.time()
 				redPlanet.reset()
 
 				# Unpause enemies
 				pauseEnemies = False
+
+				# Update level
+				level += 1
 
 	# Draw side text
 	healthText = font.render("HEALTH: " + str(health), False, WHITE)
