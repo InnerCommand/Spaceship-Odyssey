@@ -5,7 +5,7 @@ from assets.scripts.assets.bullet import *
 class spaceship:
 	def __init__(self, image : pygame.Surface, width : int, height : int, screenWidth : int, screenHeight : int) -> None:
 		"""
-		Set up the main variables
+		The player
 		"""
 
 		# Update and set images

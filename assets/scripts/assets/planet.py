@@ -3,7 +3,7 @@ import pygame
 class planet:
 	def __init__(self, image : pygame.Surface, width : int, height : int, screenWidth : int, screenHeight : int) -> None:
 		"""
-		Set variables of class
+		The end-goal/planet
 		"""
 
 		# Set styling variables

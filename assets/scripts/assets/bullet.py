@@ -3,6 +3,10 @@ import math
 
 class bullet:
 	def __init__(self, screen : pygame.Surface, width : int, height : int, x : int, y : int, screenWidth : int, screenHeight : int, angle : int = 0, color : tuple[int] = (255,255,255)) -> None:
+		"""
+		The bullet to shoot
+		"""
+		
 		# Set sizing variables
 		self.width = width
 		self.height = height
