@@ -141,7 +141,7 @@ while running:
 		waitTime = random.uniform(.5,2)
 		enemyTimer = time.time()
 	elif pauseEnemies:
-		waitTime = random.uniform(.5,2)
+		waitTime = random.uniform(1,2.5)
 		enemyTimer = time.time()
 
 	# Rectangle side timer
