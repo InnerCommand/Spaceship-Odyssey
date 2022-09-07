@@ -145,6 +145,7 @@ while running:
 	else:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
 
+		# Animate planet
 		if redPlanet.animationStat['down'] == False:
 			redPlanet.animateDown(surface)
 		else:
