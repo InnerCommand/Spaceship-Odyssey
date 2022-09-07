@@ -135,7 +135,7 @@ enemyTimer = time.time()
 startingPageShow = True
 
 # Create values for starting page
-titleFont = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
+titleFont = pygame.font.Font(r'./assets/fonts/FONT.ttf', 100)
 
 # Starting page loop
 while startingPageShow:
