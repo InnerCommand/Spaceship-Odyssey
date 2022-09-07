@@ -234,6 +234,10 @@ while running:
 				# Unpause enemies
 				pauseEnemies = False
 
+	# Draw side text
+	healthText = font.render("HEALTH: " + str(health), False, WHITE)
+	surface.blit(healthText, (20, SCREENHEIGHT-40))
+
 	# Check for keypress
 	for event in pygame.event.get():
 		# Check if user quit
