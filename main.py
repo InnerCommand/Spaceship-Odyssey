@@ -23,6 +23,9 @@ player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 
 enemies = [] 
 trackingEnemies = []
 
+health = 100
+dmgTaken = 3
+
 waitTime = .5
 
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
@@ -102,7 +105,10 @@ while running:
 	removedEnemies = []
 	for i in enemies:
 		i.moveToPlayer(surface)
+		i.shoot(surface, True)
 		player.checkHit(i)
+		if i.checkHit(player):
+			health -= dmgTaken
 		if player.checkHit(i):
 			removedEnemies.append(i)
 	enemies = [i for i in enemies if i not in removedEnemies]
@@ -110,6 +116,9 @@ while running:
 	removedEnemies = []
 	for i in trackingEnemies:
 		i.moveToPlayer(surface, player)
+		i.shoot(surface, True)
+		if i.checkHit(player):
+			health -= dmgTaken
 		if player.checkHit(i):
 			removedEnemies.append(i)
 	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
@@ -207,6 +216,11 @@ while running:
 		if event.type == pygame.VIDEORESIZE:
 			SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
 			player.resize(SCREENWIDTH, SCREENHEIGHT)
+
+	# Check player health
+	print(health)
+	if health <= 0:
+		pass
 
 	# Updates
 	pygame.display.flip()
