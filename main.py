@@ -27,6 +27,8 @@ waitTime = .5
 
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
 
+pauseEnemies = False
+
 running = True
 
 y1s1 = 0
@@ -129,13 +131,16 @@ while running:
 	enemyTimePast = current_time - enemyTimer
 
 	# Spawn enemies based on time
-	if enemyTimePast >= waitTime:
+	if enemyTimePast >= waitTime and not pauseEnemies:
 		amtEnemies = random.randint(1,3)
 		for i in range(amtEnemies):
 			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
 		amtEnemies = random.randint(0,2)
 		for i in range(amtEnemies):
 			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		waitTime = random.uniform(.5,2)
+		enemyTimer = time.time()
+	elif pauseEnemies:
 		waitTime = random.uniform(.5,2)
 		enemyTimer = time.time()
 
@@ -146,6 +151,9 @@ while running:
 	else:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
 
+		# Pause enemies
+		pauseEnemies = True
+
 		# Animate planet
 		if redPlanet.animationStat['down'] == False:
 			redPlanet.animateDown(surface)
@@ -154,6 +162,9 @@ while running:
 			if redPlanet.animationStat['up'] == True:
 				timer = time.time()
 				redPlanet.reset()
+
+				# Unpause enemies
+				pauseEnemies = False
 
 	# Check for keypress
 	for event in pygame.event.get():
