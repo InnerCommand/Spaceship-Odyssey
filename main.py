@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.characters.enemy import enemy, trackingEnemy
 from assets.scripts.assets.planet import planet
@@ -19,8 +20,10 @@ pygame.display.set_caption('Spaceship Odyssey')
 
 # Create new characters
 player = spaceship(pygame.image.load(r'./assets/images/characters/player.png'), 50, 50, SCREENWIDTH, SCREENHEIGHT)
-enemies = [enemy(pygame.image.load(r'./assets/images/characters/enemy.png'), 30, SCREENWIDTH/2+180, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)] 
-trackingEnemies = [trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),10, SCREENWIDTH/2, 60, 70, 92, SCREENWIDTH, SCREENHEIGHT, player)]
+enemies = [] 
+trackingEnemies = []
+
+waitTime = .5
 
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
 
@@ -77,8 +80,9 @@ moveState = {
 	'up' : False,
 	'shoot' : False
 }
-#timer
+# Timer
 timer = time.time()
+enemyTimer = time.time()
 
 # Game loop
 while running:
@@ -117,11 +121,24 @@ while running:
 	if moveState['shoot'] == True:
 		player.shoot(surface, True)
 
-	# Rectangle side timer
+	# Deal with timer
 	current_time = time.time()
 	time_past = timer - current_time
 	amtMove = time_past*timerSpeed
+	enemyTimePast = enemyTimer - current_time
 
+	# Spawn enemies based on time
+	if enemyTimePast >= waitTime:
+		amtEnemies = random.randint(1,3)
+		for i in range(amtEnemies):
+			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		amtEnemies = random.randint(0,2)
+		for i in range(amtEnemies):
+			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(0,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		waitTime = random.uniform(.5,2)
+		enemyTimer = time.time()
+
+	# Rectangle side timer
 	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
 	if abs(TIMERINIT-amtMove) <= 280:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERINIT)+amtMove), (40, TIMERINIT-amtMove)))
