@@ -31,6 +31,9 @@ trackingEnemies = []
 health = 100
 dmgTaken = 3
 
+# Set level variables
+level = 1
+
 # Set wait time for enemy spawn
 waitTime = .5
 
@@ -237,6 +240,9 @@ while running:
 	# Draw side text
 	healthText = font.render("HEALTH: " + str(health), False, WHITE)
 	surface.blit(healthText, (20, SCREENHEIGHT-40))
+
+	levelText = font.render("LEVEL: " + str(level), False, WHITE)
+	surface.blit(levelText, (20, SCREENHEIGHT-20))
 
 	# Check for keypress
 	for event in pygame.event.get():
