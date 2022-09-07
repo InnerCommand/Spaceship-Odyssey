@@ -43,6 +43,9 @@ pauseEnemies = False
 # Set running variable for game loop
 running = True
 
+# Set font variables
+font = pygame.font.Font(r'./assets/fonts/FONT.ttf', 30)
+
 # Set background variables
 y1s1 = 0
 y2s1 = -1*SCREENHEIGHT
@@ -86,6 +89,10 @@ ROTATION = 10
 TIMERINIT = 10
 timerSpeed = 20
 
+# Set color variables
+WHITE = (255,255,255)
+BLACK = (0,0,0)
+
 # Set clock
 clock = pygame.time.Clock()
 
@@ -104,9 +111,29 @@ enemyTimer = time.time()
 # Starting page
 startingPageShow = True
 
+# Create values for starting page
+titleFont = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
+
+# Starting page loop
 while startingPageShow:
 	# Add starting page background to screen
 	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
+	# Add title
+	title = titleFont.render("Spaceship Odyssey", False, WHITE)
+	surface.blit(title, title.get_rect(center=(SCREENWIDTH/2, 50)))
+
+	# Add start instructions
+	startInstructions = font.render("[Click anywhere to start]", False, WHITE)
+	surface.blit(startInstructions, startInstructions.get_rect(center=(SCREENWIDTH/2, SCREENHEIGHT-50)))
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			running = False
+			startingPageShow = False
+
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			startingPageShow = False
 
 	# Update frames
 	pygame.display.flip()
