@@ -118,7 +118,11 @@ while running:
 	else:
 		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
 
-		redPlanet.animateDown(surface)
+		if redPlanet.animationStat['down'] == False:
+			redPlanet.animateDown(surface)
+		else:
+			redPlanet.animateUp(surface)
+
 
 	# Movements
 	if moveState['left'] == True:

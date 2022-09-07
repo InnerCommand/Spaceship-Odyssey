@@ -21,6 +21,12 @@ class planet:
 		self.screenWidth = screenWidth
 		self.screenHeight = screenHeight
 
+		# Set animation variables
+		self.animationStat = {
+			"down" : False,
+			"up" : False
+		}
+
 	def draw(self, surface : pygame.Surface) -> None:
 		"""
 		Draw planet onto screen
@@ -43,6 +49,9 @@ class planet:
 		if self.y < self.screenHeight/2:
 			self.y += speed
 
+			self.animationStat['down'] = False
+		else: self.animationStat['down'] = True
+
 		self.draw(surface)
 
 	def animateUp(self, surface : pygame.Surface, speed : int = 5) -> None:
@@ -50,8 +59,11 @@ class planet:
 		Animate planet from middle of screen back to top
 		"""
 		self.rotate(5)
-		if self.y >  (-1*self.height)/2:
+		if self.y > (-1*self.height)/2:
 			self.y -= speed
+			
+			self.animationStat['up'] = False
+		else: self.animationStat['up'] = True
 
 		self.draw(surface)
 
