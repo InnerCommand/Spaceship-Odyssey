@@ -1,6 +1,8 @@
 import pygame
 import time
 import random
+import os
+import sys
 from assets.scripts.characters.spaceship import spaceship
 from assets.scripts.characters.enemy import enemy, trackingEnemy
 from assets.scripts.assets.planet import planet
@@ -360,6 +362,10 @@ while running:
 			# Check if user quit
 			if event.type == pygame.QUIT:
 				running = False
+
+			# Restart Game
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				os.execv(sys.executable, [sys.executable] + sys.argv)
 
 	# Updates
 	pygame.display.flip()
