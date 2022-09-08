@@ -30,6 +30,7 @@ trackingEnemies = []
 # Set player health stats
 health = 100
 dmgTaken = 3
+dead = False
 
 # Set level variables
 level = 1
@@ -105,6 +106,28 @@ def showLevelText(surface : pygame.Surface, level : int, speed : int = 5) -> boo
 
 	return False
 
+# Set death text variables
+deathTextY = 0
+
+def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> None:
+	# To display the death text
+
+	global deathTextY
+
+	# Show red screen
+	surface.fill((255,0,0))
+
+	# Show text
+	font = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
+
+	text = font.render(f'You died on level {level+1}', True, (255,255,255))
+	surface.blit(text, text.get_rect(center=(SCREENWIDTH/2, deathTextY)))
+
+	# Update y pos
+	deathTextY += speed
+	
+	if deathTextY >= SCREENHEIGHT/2: deathTextY = SCREENHEIGHT/2
+
 # Set speeds of how things will run
 FPS = 30
 ACCELERATION = 12
@@ -164,164 +187,167 @@ while startingPageShow:
 
 # Game loop
 while running:
-	# Updating frames
-	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+	if dead == False:
+		# Updating frames
+		setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
 
-	# Shooting
-	if player.shootState == True:
-		player.shoot(surface)
+		# Shooting
+		if player.shootState == True:
+			player.shoot(surface)
 
-	# Draw player
-	player.draw(surface)
+		# Draw player
+		player.draw(surface)
 
-	# Update and draw enemies
-	removedEnemies = []
-	for i in enemies:
-		i.moveToPlayer(surface)
-		i.shoot(surface, True)
-		player.checkHit(i)
-		if i.checkHit(player):
-			health -= dmgTaken
-		if player.checkHit(i):
-			removedEnemies.append(i)
-	enemies = [i for i in enemies if i not in removedEnemies]
+		# Update and draw enemies
+		removedEnemies = []
+		for i in enemies:
+			i.moveToPlayer(surface)
+			i.shoot(surface, True)
+			player.checkHit(i)
+			if i.checkHit(player):
+				health -= dmgTaken
+			if player.checkHit(i):
+				removedEnemies.append(i)
+		enemies = [i for i in enemies if i not in removedEnemies]
 
-	removedEnemies = []
-	for i in trackingEnemies:
-		i.moveToPlayer(surface, player)
-		i.shoot(surface, True)
-		if i.checkHit(player):
-			health -= dmgTaken
-		if player.checkHit(i):
-			removedEnemies.append(i)
-	trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
+		removedEnemies = []
+		for i in trackingEnemies:
+			i.moveToPlayer(surface, player)
+			i.shoot(surface, True)
+			if i.checkHit(player):
+				health -= dmgTaken
+			if player.checkHit(i):
+				removedEnemies.append(i)
+		trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
 
-	# Movements
-	if moveState['left'] == True:
-		player.rotate(ROTATION)
-	if moveState['right'] == True:
-		player.rotate(-1*ROTATION)
-	if moveState['up'] == True:
-		player.move(ACCELERATION)
-	if moveState['shoot'] == True:
-		player.shoot(surface, True)
+		# Movements
+		if moveState['left'] == True:
+			player.rotate(ROTATION)
+		if moveState['right'] == True:
+			player.rotate(-1*ROTATION)
+		if moveState['up'] == True:
+			player.move(ACCELERATION)
+		if moveState['shoot'] == True:
+			player.shoot(surface, True)
 
-	# Deal with timer
-	current_time = time.time()
-	time_past = timer - current_time
-	amtMove = time_past*timerSpeed
-	enemyTimePast = current_time - enemyTimer
+		# Deal with timer
+		current_time = time.time()
+		time_past = timer - current_time
+		amtMove = time_past*timerSpeed
+		enemyTimePast = current_time - enemyTimer
 
-	# Spawn enemies based on time
-	if enemyTimePast >= waitTime and not pauseEnemies:
-		# Spawn normal enemies
-		amtEnemies = random.randint(1,3)
-		for i in range(amtEnemies):
-			enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+		# Spawn enemies based on time
+		if enemyTimePast >= waitTime and not pauseEnemies:
+			# Spawn normal enemies
+			amtEnemies = random.randint(1,3)
+			for i in range(amtEnemies):
+				enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+			
+			# Spawn tracking enemies
+			amtEnemies = random.randint(0,2)
+			for i in range(amtEnemies):
+				trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
+			
+			# Update timers
+			waitTime = random.uniform(.5,2)
+			enemyTimer = time.time()
 		
-		# Spawn tracking enemies
-		amtEnemies = random.randint(0,2)
-		for i in range(amtEnemies):
-			trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
-		
-		# Update timers
-		waitTime = random.uniform(.5,2)
-		enemyTimer = time.time()
-	
-	# Prevent enemies from spawning when paused
-	elif pauseEnemies:
-		waitTime = random.uniform(1,2.5)
-		enemyTimer = time.time()
+		# Prevent enemies from spawning when paused
+		elif pauseEnemies:
+			waitTime = random.uniform(1,2.5)
+			enemyTimer = time.time()
 
-	# Rectangle side timer
-	pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
-	if abs(TIMERINIT-amtMove) <= 280:
-		# Draw timers
-		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERINIT)+amtMove), (40, TIMERINIT-amtMove)))
-	else:
-		pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
-
-		# Pause enemies
-		pauseEnemies = True
-
-		# Animate planet
-		if redPlanet.animationStat['down'] == False:
-			redPlanet.animateDown(surface)
+		# Rectangle side timer
+		pygame.draw.rect(surface, (0, 100, 0), pygame.Rect((45, 190), (50, 290)))
+		if abs(TIMERINIT-amtMove) <= 280:
+			# Draw timers
+			pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, (475-TIMERINIT)+amtMove), (40, TIMERINIT-amtMove)))
 		else:
-			# Show level notification
-			planetPause = showLevelText(surface, level)
+			pygame.draw.rect(surface, (0, 255, 0), pygame.Rect((50, 195), (40, 280)))
+
+			# Pause enemies
+			pauseEnemies = True
 
 			# Animate planet
-			redPlanet.animateThrough(surface)
+			if redPlanet.animationStat['down'] == False:
+				redPlanet.animateDown(surface)
+			else:
+				# Show level notification
+				planetPause = showLevelText(surface, level)
 
-			# Check if planet and level notification has finished animating
-			if redPlanet.animationStat['through'] == True and planetPause == True:
-				# Reset timers
-				timer = time.time()
-				redPlanet.reset()
+				# Animate planet
+				redPlanet.animateThrough(surface)
 
-				# Unpause enemies
-				pauseEnemies = False
+				# Check if planet and level notification has finished animating
+				if redPlanet.animationStat['through'] == True and planetPause == True:
+					# Reset timers
+					timer = time.time()
+					redPlanet.reset()
 
-				# Update level
-				level += 1
+					# Unpause enemies
+					pauseEnemies = False
 
-				# Update speed
-				ACCELERATION += 5
-				ROTATION += 5
+					# Update level
+					level += 1
 
-				# Update health
-				health += 10
+					# Update speed
+					ACCELERATION += 5
+					ROTATION += 5
 
-	# Draw side text
-	healthText = font.render("HEALTH: " + str(health), False, WHITE)
-	surface.blit(healthText, (25, SCREENHEIGHT-40))
+					# Update health
+					health += 10
 
-	levelText = font.render("LEVEL: " + str(level), False, WHITE)
-	surface.blit(levelText, (25, SCREENHEIGHT-60))
+		# Draw side text
+		healthText = font.render("HEALTH: " + str(health), False, WHITE)
+		surface.blit(healthText, (25, SCREENHEIGHT-40))
 
-	speedText = font.render("SPEED: " + str(ACCELERATION), False, WHITE)
-	surface.blit(speedText, (25, SCREENHEIGHT-80))
+		levelText = font.render("LEVEL: " + str(level), False, WHITE)
+		surface.blit(levelText, (25, SCREENHEIGHT-60))
 
-	# Check for keypress
-	for event in pygame.event.get():
-		# Check if user quit
-		if event.type == pygame.QUIT:
-			running = False
+		speedText = font.render("SPEED: " + str(ACCELERATION), False, WHITE)
+		surface.blit(speedText, (25, SCREENHEIGHT-80))
 
-		# Check for user keypresses
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_UP:
-				moveState['up'] = True
-			if event.key == pygame.K_RIGHT:
-				moveState['right'] = True
-			if event.key == pygame.K_LEFT:
-				moveState['left'] = True
+		# Check for keypress
+		for event in pygame.event.get():
+			# Check if user quit
+			if event.type == pygame.QUIT:
+				running = False
 
-			if event.key == pygame.K_SPACE:
-				moveState['shoot'] = True
+			# Check for user keypresses
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_UP:
+					moveState['up'] = True
+				if event.key == pygame.K_RIGHT:
+					moveState['right'] = True
+				if event.key == pygame.K_LEFT:
+					moveState['left'] = True
 
-		# Remove movements when key no longer pressed
-		elif event.type == pygame.KEYUP:
-			if event.key == pygame.K_UP:
-				moveState['up'] = False
-			if event.key == pygame.K_LEFT:
-				moveState['left'] = False
-			if event.key == pygame.K_RIGHT:
-				moveState['right'] = False
+				if event.key == pygame.K_SPACE:
+					moveState['shoot'] = True
 
-			if event.key == pygame.K_SPACE:
-				moveState['shoot'] = False
+			# Remove movements when key no longer pressed
+			elif event.type == pygame.KEYUP:
+				if event.key == pygame.K_UP:
+					moveState['up'] = False
+				if event.key == pygame.K_LEFT:
+					moveState['left'] = False
+				if event.key == pygame.K_RIGHT:
+					moveState['right'] = False
 
-		# Check if game has resized
-		if event.type == pygame.VIDEORESIZE:
-			SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
-			player.resize(SCREENWIDTH, SCREENHEIGHT)
+				if event.key == pygame.K_SPACE:
+					moveState['shoot'] = False
 
-	# Check player health
-	print(health)
-	if health <= 0:
-		pass
+			# Check if game has resized
+			if event.type == pygame.VIDEORESIZE:
+				SCREENWIDTH, SCREENHEIGHT = pygame.display.get_surface().get_size()
+				player.resize(SCREENWIDTH, SCREENHEIGHT)
+
+		# Check player health
+		death = health <= 0
+
+	else:
+		# Show game over screen
+		showDeathText(surface, level)
 
 	# Updates
 	pygame.display.flip()
