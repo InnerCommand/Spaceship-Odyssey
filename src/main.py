@@ -343,7 +343,7 @@ while running:
 				player.resize(SCREENWIDTH, SCREENHEIGHT)
 
 		# Check player health
-		death = health <= 0
+		dead = health <= 0
 
 	else:
 		# Show game over screen
