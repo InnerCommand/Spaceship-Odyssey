@@ -97,7 +97,20 @@ class spaceship:
 			self.x = 0+(self.width/2)
 
 	def checkHit(self, enemy) -> bool:
+		"""
+		Check if bullets have hit enemy
+		"""
+
+		removedShooters = []
+		returnVal = False
+
+		# Check if all bullets are touching enemy
 		for i in self.shooter:
 			if (enemy.x-enemy.width <= i.x <= enemy.x+enemy.width) and (enemy.y-enemy.height <= i.y <= enemy.y+enemy.height):
-				del i
-				return True
+				removedShooters.append(i)
+				returnVal = True
+		
+		# Remove bullets that hit enemy
+		self.shooter = [i for i in self.shooter if i not in removedShooters]
+		
+		return returnVal
