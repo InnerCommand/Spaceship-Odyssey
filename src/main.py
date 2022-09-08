@@ -107,7 +107,7 @@ def showLevelText(surface : pygame.Surface, level : int, speed : int = 5) -> boo
 	return False
 
 # Set death text variables
-deathTextY = 0
+deathTextY = -1*SCREENHEIGHT/2
 
 def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> None:
 	# To display the death text
@@ -115,7 +115,9 @@ def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> Non
 	global deathTextY
 
 	# Show red screen
-	surface.fill((255,0,0))
+	redScreen = pygame.Rect((SCREENWIDTH,deathTextY),(SCREENWIDTH,SCREENHEIGHT))
+	redScreen.center = (SCREENWIDTH/2, deathTextY)
+	pygame.draw.rect(surface, (150,0,0), redScreen)
 
 	# Show text
 	font = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
@@ -159,6 +161,7 @@ startingPageShow = True
 
 # Create values for starting page
 titleFont = pygame.font.Font(r'./assets/fonts/FONT.ttf', 100)
+
 
 # Starting page loop
 while startingPageShow:
@@ -346,8 +349,17 @@ while running:
 		dead = health <= 0
 
 	else:
+		# Show starry background
+		setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
 		# Show game over screen
 		showDeathText(surface, level)
+
+		# Allow quitting of game
+		for event in pygame.event.get():
+			# Check if user quit
+			if event.type == pygame.QUIT:
+				running = False
 
 	# Updates
 	pygame.display.flip()
