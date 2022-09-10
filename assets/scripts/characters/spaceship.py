@@ -75,6 +75,12 @@ class spaceship:
 
 			if self.shootState == False:
 				del i
+		#music
+		pygame.mixer.init()
+		pygame.mixer.music.load(r'./assets/sound/effects/blaster.wav')
+		pygame.mixer.music.set_volume(0.7)
+		pygame.mixer.music.play()
+		
 
 	def resize(self, screenWidth : int, screenHeight : int) -> None:
 		"""

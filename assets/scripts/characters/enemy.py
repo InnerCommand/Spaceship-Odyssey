@@ -7,8 +7,8 @@ class enemy(spaceship):
 	def __init__(self, image : pygame.Surface, speed : int, x : int, y : int, width : int, height : int, screenWidth : int, screenHeight : int, player : spaceship) -> None:
 		"""
 		Enemy ship
-		"""
-		
+		"""	
+
 		# Set enemy details
 		self.image = pygame.transform.scale(image, (width, height))
 		self.rect = image.get_rect()
