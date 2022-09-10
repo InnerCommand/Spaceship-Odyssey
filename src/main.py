@@ -164,11 +164,17 @@ startingPageShow = True
 # Create values for starting page
 titleFont = pygame.font.Font(r'./assets/fonts/FONT.ttf', 100)
 
+# Add background music
+pygame.mixer.init()
+pygame.mixer.music.load(r'./assets/sound/effects/BGM.mp3')
+pygame.mixer.music.set_volume(0.9)
+pygame.mixer.music.play()
 
 # Starting page loop
 while startingPageShow:
 	# Add starting page background to screen
 	setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
+
 
 	# Add title
 	title = titleFont.render("Spaceship Odyssey", False, WHITE)
@@ -356,6 +362,12 @@ while running:
 
 		# Show game over screen
 		showDeathText(surface, level)
+
+		# Add death music
+		pygame.mixer.init()
+		pygame.mixer.music.load(r'./assets/sound/effects/dies.mp3')
+		pygame.mixer.music.set_volume(0.7)
+		pygame.mixer.music.play()
 
 		# Allow quitting of game
 		for event in pygame.event.get():
