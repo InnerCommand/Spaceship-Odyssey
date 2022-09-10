@@ -207,7 +207,7 @@ while running:
 		removedEnemies = []
 		for i in enemies:
 			i.moveToPlayer(surface)
-			i.shoot(surface, True)
+			i.shoot(surface, True, 50)
 			player.checkHit(i)
 			if i.checkHit(player):
 				health -= dmgTaken
@@ -218,7 +218,7 @@ while running:
 		removedEnemies = []
 		for i in trackingEnemies:
 			i.moveToPlayer(surface, player)
-			i.shoot(surface, True)
+			i.shoot(surface, True, 50)
 			if i.checkHit(player):
 				health -= dmgTaken
 			if player.checkHit(i):

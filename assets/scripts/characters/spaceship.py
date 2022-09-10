@@ -64,14 +64,14 @@ class spaceship:
 		self.angle += angle
 		self.rect = pygame.transform.rotate(self.image, self.angle).get_rect()
 
-	def shoot(self, surface : pygame.Surface, initial = False) -> None:
+	def shoot(self, surface : pygame.Surface, initial = False, speed = 25) -> None:
 		"""
 		Shooting bullets with bullet class
 		"""
 		if initial: self.shooter.append(bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle))
 
 		for i in self.shooter:
-			self.shootState = i.shoot(25)
+			self.shootState = i.shoot(speed)
 
 			if self.shootState == False:
 				del i
