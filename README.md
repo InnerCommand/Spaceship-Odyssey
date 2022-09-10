@@ -26,13 +26,16 @@ python3 run_game.py
 - [realhuman](https://pyweek.org/u/realhuman/):
   - Team Leader
   - Code
-  - Storyline
+  - UI
+  - Art
+  - Sound Effects
   - Testing
 
 - [Maya](https://pyweek.org/u/mayahkg/):
   - Code
   - Storyline
   - Art
+  - Music
 
 - Robbels:
   - Art
