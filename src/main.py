@@ -185,6 +185,14 @@ while startingPageShow:
 	title = titleFont.render("Spaceship Odyssey", False, WHITE)
 	surface.blit(title, title.get_rect(center=(SCREENWIDTH/2, 50)))
 
+	# Add instructions
+	controls = font.render("Controls:", False, WHITE)
+	surface.blit(controls, controls.get_rect(center=(SCREENWIDTH/2, 150)))
+
+	# Add controls
+	controls = font.render("A - Left, D - Right, W - Up, Space - Shoot", False, WHITE)
+	surface.blit(controls, controls.get_rect(center=(SCREENWIDTH/2, 200)))
+
 	# Add start instructions
 	startInstructions = font.render("[Click anywhere to start]", False, WHITE)
 	surface.blit(startInstructions, startInstructions.get_rect(center=(SCREENWIDTH/2, SCREENHEIGHT-50)))
