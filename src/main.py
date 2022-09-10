@@ -9,6 +9,7 @@ from assets.scripts.assets.planet import planet
 
 # Init
 pygame.init()
+pygame.mixer.init()
 pygame.font.init()
 
 # Set screen

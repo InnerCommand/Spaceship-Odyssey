@@ -68,18 +68,19 @@ class spaceship:
 		"""
 		Shooting bullets with bullet class
 		"""
-		if initial: self.shooter.append(bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle))
+		if initial: 
+			self.shooter.append(bullet(surface, 5, 5, self.x, self.y, self.screenWidth, self.screenHeight, angle=self.angle))
+
+			# Play sound effect
+			pygame.mixer.music.load(r'./assets/sound/effects/blaster.wav')
+			pygame.mixer.music.set_volume(0.7)
+			pygame.mixer.music.play()
 
 		for i in self.shooter:
 			self.shootState = i.shoot(speed)
 
 			if self.shootState == False:
 				del i
-		#music
-		pygame.mixer.init()
-		pygame.mixer.music.load(r'./assets/sound/effects/blaster.wav')
-		pygame.mixer.music.set_volume(0.7)
-		pygame.mixer.music.play()
 		
 
 	def resize(self, screenWidth : int, screenHeight : int) -> None:
