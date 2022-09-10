@@ -97,7 +97,7 @@ def showLevelText(surface : pygame.Surface, level : int, speed : int = 5) -> boo
 
 	global levelNotificationY
 
-	text = font.render(f'Level {level+1}', True, (255,255,255))
+	text = font.render(f'Level {level}', True, (255,255,255))
 	surface.blit(text, text.get_rect(center=(SCREENWIDTH/2, levelNotificationY)))
 
 	if levelNotificationY < SCREENHEIGHT:
@@ -134,7 +134,7 @@ def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> Non
 
 # Set speeds of how things will run
 FPS = 30
-ACCELERATION = 12
+ACCELERATION = 8
 ROTATION = 10
 TIMERINIT = 10
 timerSpeed = 20
