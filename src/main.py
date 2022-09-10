@@ -135,7 +135,7 @@ def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> Non
 # Set speeds of how things will run
 FPS = 30
 ACCELERATION = 8
-ROTATION = 10
+ROTATION = 5
 TIMERINIT = 10
 timerSpeed = 20
 
