@@ -31,7 +31,7 @@ trackingEnemies = []
 
 # Set player health stats
 health = 100
-dmgTaken = 3
+dmgTaken = 2
 dead = False
 
 # Set level variables
@@ -39,7 +39,7 @@ level = 1
 levelNotificationY = 0
 
 # Set wait time for enemy spawn
-waitTime = .5
+waitTime = 1
 
 # Planet variables
 redPlanet = planet(pygame.image.load(r'./assets/images/items/planet.png'), 250, 250, SCREENWIDTH, SCREENHEIGHT)
@@ -271,22 +271,22 @@ while running:
 		# Spawn enemies based on time
 		if enemyTimePast >= waitTime and not pauseEnemies:
 			# Spawn normal enemies
-			amtEnemies = random.randint(1,3)
+			amtEnemies = random.randint(1,2)
 			for i in range(amtEnemies):
 				enemies.append(enemy(pygame.image.load(r'./assets/images/characters/enemy.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
 			
 			# Spawn tracking enemies
-			amtEnemies = random.randint(0,2)
+			amtEnemies = random.randint(0,1)
 			for i in range(amtEnemies):
 				trackingEnemies.append(trackingEnemy(pygame.image.load(r'./assets/images/characters/enemyTracker.png'),20,random.randint(-92,SCREENWIDTH),0,70,92,SCREENWIDTH,SCREENHEIGHT,player))
 			
 			# Update timers
-			waitTime = random.uniform(.5,2)
+			waitTime = random.uniform(1,2)
 			enemyTimer = time.time()
 		
 		# Prevent enemies from spawning when paused
 		elif pauseEnemies:
-			waitTime = random.uniform(1,2.5)
+			waitTime = random.uniform(1.5,2.5)
 			enemyTimer = time.time()
 
 		# Rectangle side timer
