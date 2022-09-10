@@ -383,18 +383,19 @@ while running:
 		# Check player health
 		dead = health <= 0
 
+		# Check if player is dead
+		if dead:
+			# Play death sound
+			pygame.mixer.music.load(r'./assets/sound/effects/dies.mp3')
+			pygame.mixer.music.set_volume(0.7)
+			pygame.mixer.music.play()
+
 	else:
 		# Show starry background
 		setBackground(SCREENWIDTH, SCREENHEIGHT, surface)
 
 		# Show game over screen
 		showDeathText(surface, level)
-
-		# Add death music
-		pygame.mixer.init()
-		pygame.mixer.music.load(r'./assets/sound/effects/dies.mp3')
-		pygame.mixer.music.set_volume(0.7)
-		pygame.mixer.music.play()
 
 		# Allow quitting of game
 		for event in pygame.event.get():
