@@ -17,9 +17,9 @@ python3 run_game.py
 ```
 
 ## Controls
-- **Up arrow key** to move forwards
-- **Left arrow key** to rotate left
-- **Right arrow key** to rotate right
+- **Up arrow key** or **W key** to move forwards
+- **Left arrow key** or **A key** to rotate left
+- **Right arrow key** or **S key** to rotate right
 - **Space key** to shoot
 
 ## Credits
