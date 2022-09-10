@@ -124,7 +124,7 @@ def showDeathText(surface : pygame.Surface, level : int, speed : int = 5) -> Non
 	# Show text
 	font = pygame.font.Font(r'./assets/fonts/FONT.ttf', 50)
 
-	text = font.render(f'You died on level {level+1}', True, (255,255,255))
+	text = font.render(f'You died on level {level}', True, (255,255,255))
 	surface.blit(text, text.get_rect(center=(SCREENWIDTH/2, deathTextY)))
 
 	# Update y pos
@@ -148,9 +148,14 @@ clock = pygame.time.Clock()
 
 # All movestates
 moveState = {
-	'left' : False,
-	'right' : False,
-	'up' : False,
+	'leftA' : False,
+	'rightA' : False,
+	'upA' : False,
+
+	'leftW' : False,
+	'rightW' : False,
+	'upW' : False,
+	
 	'shoot' : False
 }
 
@@ -226,12 +231,20 @@ while running:
 		trackingEnemies = [i for i in trackingEnemies if i not in removedEnemies]
 
 		# Movements
-		if moveState['left'] == True:
+		if moveState['leftA'] == True:
 			player.rotate(ROTATION)
-		if moveState['right'] == True:
+		if moveState['rightA'] == True:
 			player.rotate(-1*ROTATION)
-		if moveState['up'] == True:
+		if moveState['upA'] == True:
 			player.move(ACCELERATION)
+
+		if moveState['leftW'] == True:
+			player.rotate(ROTATION)
+		if moveState['rightW'] == True:
+			player.rotate(-1*ROTATION)
+		if moveState['upW'] == True:
+			player.move(ACCELERATION)
+
 		if moveState['shoot'] == True:
 			player.shoot(surface, True)
 
@@ -321,11 +334,18 @@ while running:
 			# Check for user keypresses
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_UP:
-					moveState['up'] = True
+					moveState['upA'] = True
 				if event.key == pygame.K_RIGHT:
-					moveState['right'] = True
+					moveState['rightA'] = True
 				if event.key == pygame.K_LEFT:
-					moveState['left'] = True
+					moveState['leftA'] = True
+					
+				if event.key == pygame.K_w:
+					moveState['upW'] = True
+				if event.key == pygame.K_d:
+					moveState['rightW'] = True
+				if event.key == pygame.K_a:
+					moveState['leftW'] = True
 
 				if event.key == pygame.K_SPACE:
 					moveState['shoot'] = True
@@ -333,11 +353,18 @@ while running:
 			# Remove movements when key no longer pressed
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_UP:
-					moveState['up'] = False
+					moveState['upA'] = False
 				if event.key == pygame.K_LEFT:
-					moveState['left'] = False
+					moveState['leftA'] = False
 				if event.key == pygame.K_RIGHT:
-					moveState['right'] = False
+					moveState['rightA'] = False
+
+				if event.key == pygame.K_w:
+					moveState['upW'] = False
+				if event.key == pygame.K_a:
+					moveState['leftW'] = False
+				if event.key == pygame.K_d:
+					moveState['rightW'] = False
 
 				if event.key == pygame.K_SPACE:
 					moveState['shoot'] = False
