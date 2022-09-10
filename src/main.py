@@ -190,7 +190,7 @@ while startingPageShow:
 	surface.blit(controls, controls.get_rect(center=(SCREENWIDTH/2, 150)))
 
 	# Add controls
-	controls = font.render("A - Left, D - Right, W - Up, Space - Shoot", False, WHITE)
+	controls = font.render("A - Rotate Left, D - Rotate Right, W - Move Forwards, Space - Shoot", False, WHITE)
 	surface.blit(controls, controls.get_rect(center=(SCREENWIDTH/2, 200)))
 
 	# Add start instructions
